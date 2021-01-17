@@ -8,8 +8,8 @@ namespace ShamirConsole
 {
     class Program
     {
-        static string text = "JONNI";
-        static long p = 23;
+        static public  string text = "DOS";
+        static public long p = 23;
 
 
         static void Main(string[] args)
@@ -37,19 +37,20 @@ namespace ShamirConsole
             A_Abonent.PrintNumberEncrypt();//Вывод текста  в числ. представлении  
 
 
-            int[]C1 = A_Abonent.FirstStepE(A_Abonent.GetNumberEncrypt());
+            long[]C1 = A_Abonent.FirstStepE(A_Abonent.GetNumberEncrypt());////////////////////////////////////////////////////////////////////////
+            //C1 = new long[] { 1, 2, 3, 5 };
             A_Abonent.PrintLog("Текст в числовом представлении C1: " + Shamir.NumberEncryptToString(C1), true);
-            A_Abonent.PrintLog("Текст в символьном представлении С1: " + Shamir.NumberEncryptToTextWithSpace(C1),true);
+            A_Abonent.PrintLog("Текст в символьном представлении С1: " + Shamir.NumberEncryptToTextWithSpace(C1), true);
 
-            int[] C2 = B_Abonent.FirstStepE(C1);
+            long[] C2 = B_Abonent.FirstStepE(C1);
             B_Abonent.PrintLog("Текст в числовом представлении C2: " + Shamir.NumberEncryptToString(C2), true);
             B_Abonent.PrintLog("Текст в символьном представлении С2: " + Shamir.NumberEncryptToTextWithSpace(C2), true);
 
-            int[] C3 = A_Abonent.SecondStepD(C2);
+            long[] C3 = A_Abonent.SecondStepD(C2);
             A_Abonent.PrintLog("Текст в числовом представлении C3: " + Shamir.NumberEncryptToString(C3), true);
             A_Abonent.PrintLog("Текст в символьном представлении С3: " + Shamir.NumberEncryptToTextWithSpace(C3), true);
             
-            int[] C4 = B_Abonent.SecondStepD(C3);
+            long[] C4 = B_Abonent.SecondStepD(C3);
             B_Abonent.PrintLog("Текст в числовом представлении C4: " + Shamir.NumberEncryptToString(C4), true);
             B_Abonent.PrintLog("Текст в символьном представлении С4: " + Shamir.NumberEncryptToTextWithSpace(C4), true);
 

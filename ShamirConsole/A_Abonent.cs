@@ -8,15 +8,15 @@ namespace ShamirConsole
 {
     static class A_Abonent
     {
-        static private int[] NumberEncrypt;
-        static private int[] FirstNumberEncrypt;
-        static private int[] SecondNumberEncrypt;
+        static private long[] NumberEncrypt;
+        static private long[] FirstNumberEncrypt;
+        static private long[] SecondNumberEncrypt;
 
         static private long E;
         static private long P;
         static private long D;
 
-        static public int[] GetNumberEncrypt()
+        static public long[] GetNumberEncrypt()
         {
             return NumberEncrypt;
         }
@@ -80,22 +80,22 @@ namespace ShamirConsole
                 Console.Write("| Абонент A | " + str);
         }
 
-        static public int[] FirstStepE(int[] C)
+        static public long[] FirstStepE(long[] C)
         {
-            FirstNumberEncrypt = new int[C.Length];
+            FirstNumberEncrypt = new long[C.Length];
             for (int i = 0; i < C.Length; i++)
             {
-                FirstNumberEncrypt[i] = (int)Shamir.reSquaring(C[i], E, P);//c=m^e(mod n)
+                FirstNumberEncrypt[i] = (long)(Shamir.reSquaring(C[i], E, P));//c=m^e(mod n)
             }
             return FirstNumberEncrypt;
         }
 
-        static public int[] SecondStepD(int[] C)
+        static public long[] SecondStepD(long[] C)
         {
-            SecondNumberEncrypt = new int[C.Length];
-            for (int i = 0; i < C.Length; i++)
+            SecondNumberEncrypt = new long[C.Length];
+            for (long i = 0; i < C.Length; i++)
             {
-                SecondNumberEncrypt[i] = (int)Shamir.reSquaring(C[i], D, P);//c=m^e(mod n)
+                SecondNumberEncrypt[i] = (long)(Shamir.reSquaring(C[i], D, P));//c=m^e(mod n)
             }
             return SecondNumberEncrypt;
         }

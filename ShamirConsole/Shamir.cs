@@ -10,7 +10,7 @@ namespace ShamirConsole
 	static class Shamir
 	{
 		static private string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		static private int[] numericConversion;
+		static private long[] numericConversion;
 		static private string stringConversion;
 
 		static public void extendedGCD(long a, long b, out long x, out long y, out long d)//Расширенный алгоритм Евклида
@@ -45,9 +45,9 @@ namespace ShamirConsole
 			return A;
 		}
 
-		static public int[] TextToNumberEncrypt(string Text)//Текст в набор чисел
+		static public long[] TextToNumberEncrypt(string Text)//Текст в набор чисел
 		{
-			numericConversion = new int[Text.Length];
+			numericConversion = new long[Text.Length];
 			for (int i = 0; i < Text.Length; i++)//Числовой вид сообщения
 			{
 				for (int j = 0; j < Alphabet.Length; j++)
@@ -61,23 +61,25 @@ namespace ShamirConsole
 			return numericConversion;
 		}
 
-		static public string NumberEncryptToText(int[] NumberEncrypt)//Набор чисел в текст
+		static public string NumberEncryptToText(long[] NumberEncrypt)//Набор чисел в текст
         {
 			stringConversion = "";
             for (int i = 0; i < NumberEncrypt.Length; i++)
             {
-				stringConversion += Alphabet[NumberEncrypt[i] - 1];
-            }
+				if (NumberEncrypt[i] == 0) stringConversion += " ";
+				else stringConversion += Alphabet[(int)(NumberEncrypt[i] - 1)];
+			}
 			return stringConversion;
 		}
 		
-		static public string NumberEncryptToTextWithSpace(int[] NumberEncrypt)//Набор чисел в текст
+		static public string NumberEncryptToTextWithSpace(long[] NumberEncrypt)//Набор чисел в текст
         {
 			stringConversion = "";
-            for (int i = 0; i < NumberEncrypt.Length; i++)
-            {
-				stringConversion += Alphabet[NumberEncrypt[i] - 1] + " ";
-            }
+			for (int i = 0; i < NumberEncrypt.Length; i++)
+			{
+				if (NumberEncrypt[i] == 0) stringConversion += " ";
+				else stringConversion += Alphabet[(int)(NumberEncrypt[i] - 1)] + " ";
+			}
 			return stringConversion;
 		}
 
@@ -85,21 +87,21 @@ namespace ShamirConsole
 		{
 			BigInteger E = e;
 
-			int i;
+			long i;
 			for (i = 1; E != 1; i++)//Проверка количества элементов
 				E = E / 2;
 
 			BigInteger[] bynaryN = new BigInteger[i];
 
 			E = e;
-			for (int j = 0; j < i; j++)//Степень в бинарном представлении
+			for (long j = 0; j < i; j++)//Степень в бинарном представлении
 			{
 				bynaryN[j] = E % 2;
 				E = E / 2;
 			}
 
 			BigInteger b = m % n;
-			for (int j = 1; j < i; j++)//Возведение в степень
+			for (long j = 1; j < i; j++)//Возведение в степень
 			{
 				b = BigInteger.ModPow(b, 2, n);
 				if (bynaryN[j] == 1)
@@ -108,7 +110,7 @@ namespace ShamirConsole
 			return m;
 		}
 
-		public static string NumberEncryptToString(int[]NE)
+		public static string NumberEncryptToString(long[]NE)
         {
 			string str = "";
             foreach (var item in NE)
